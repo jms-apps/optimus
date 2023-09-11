@@ -1,12 +1,11 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.css';
 
-import NxWelcome from './nx-welcome';
+import { Button } from '@mui/material';
 
 export function App() {
   return (
-    <div>
-      <NxWelcome title="fe" />
+    <div className="bg-yellow-50 p-2">
+      Hello! <Button variant="contained">Submit</Button>
     </div>
   );
 }
