@@ -1,21 +1,18 @@
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
-import resolveConfig from 'tailwindcss/resolveConfig';
-// import tailwindConfig from '../tailwind.config.js';
 
 import App from './app/app';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-// const fullConfig = resolveConfig(tailwindConfig);
+import { RouterProvider } from 'react-router-dom';
+import { router } from './routes';
 
 const defaultTheme = createTheme({
   palette: {
     primary: { main: '#0a2463' }, // 254E70 2274A5 // use rubik fonts
   },
-  // typography: {
-  //   fontf
-  //   fontFamily: ['Rubik'],
-  // },
+  typography: {
+    fontFamily: 'Lato',
+  },
 });
 
 const root = ReactDOM.createRoot(
@@ -24,7 +21,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <StrictMode>
     <ThemeProvider theme={defaultTheme}>
-      <App />
+      <RouterProvider router={router} />
     </ThemeProvider>
   </StrictMode>
 );

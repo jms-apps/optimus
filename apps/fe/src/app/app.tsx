@@ -5,7 +5,7 @@ import { Button } from '@mui/material';
 export function App() {
   return (
     <div className="bg-yellow-50 p-2">
-      Hello! <Button variant="contained">Text</Button>
+      Hello! <Button variant="contained">Submit</Button>
     </div>
   );
 }
