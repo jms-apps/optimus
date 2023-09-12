@@ -35,6 +35,12 @@ export class FrontEndStack extends cdk.Stack {
 
     new Distribution(this, 'optimus-fe', {
       defaultRootObject: 'index.html',
+      errorResponses: [
+        {
+          httpStatus: 404,
+          responsePagePath: '/index.html',
+        },
+      ],
       defaultBehavior: {
         origin: new S3Origin(bucket, { originAccessIdentity }),
       },
