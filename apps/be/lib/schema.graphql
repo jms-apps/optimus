@@ -1,0 +1,30 @@
+type Inventory {
+  sku: String!
+  title: String!
+  barcodeNumber: Int
+  retailPrice: Int
+  purchasePrice: Int
+  stockLevel: Int!
+  inOpenOrders: Int
+  available: Int!
+  minimumLevel: Int!
+}
+
+type Query {
+  getInventory: [Inventory!]
+}
+
+input InventoryInput {
+  title: String!
+  barcodeNumber: Int
+  retailPrice: Int
+  purchasePrice: Int
+  stockLevel: Int!
+  inOpenOrders: Int
+  available: Int!
+  minimumLevel: Int!
+}
+
+type Mutation {
+  addInventory(input: InventoryInput): Inventory
+}
