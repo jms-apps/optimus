@@ -6,6 +6,7 @@ import { InventoryStack } from '../lib/inventory/inventory-stack';
 import { CoreStack } from '../lib/core/core-stack';
 
 import path = require('path');
+import { FrontEndStack } from '../lib/front-end/front-end-stack';
 
 const app = new cdk.App();
 const coreStack = new CoreStack(app, 'CoreStack', {});
@@ -23,4 +24,5 @@ new BeStack(app, 'BeStack', {
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
 });
 
+new FrontEndStack(app, 'FrontEndStack', {});
 new InventoryStack(app, 'InventoryStack', { api: coreStack.api });
