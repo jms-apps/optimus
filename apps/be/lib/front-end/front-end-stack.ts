@@ -10,6 +10,7 @@ import {
 import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import { Distribution, OriginAccessIdentity } from 'aws-cdk-lib/aws-cloudfront';
 import { S3Origin } from 'aws-cdk-lib/aws-cloudfront-origins';
+import { Certificate } from 'aws-cdk-lib/aws-certificatemanager';
 
 export class FrontEndStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -33,8 +34,18 @@ export class FrontEndStack extends cdk.Stack {
     );
     bucket.grantRead(originAccessIdentity);
 
+    const certificateArn =
+      'arn:aws:acm:us-east-1:618246572188:certificate/bbf76ebd-498e-4bae-b85a-7df1e6f764ef';
+    const certificate = Certificate.fromCertificateArn(
+      this,
+      'sujanashah.comCert',
+      certificateArn
+    );
+
     new Distribution(this, 'optimus-fe', {
       defaultRootObject: 'index.html',
+      domainNames: ['optimus.sujanashah.com'],
+      certificate,
       errorResponses: [
         {
           httpStatus: 404,
