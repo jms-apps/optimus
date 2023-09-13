@@ -12,6 +12,7 @@ import { S3Origin } from 'aws-cdk-lib/aws-cloudfront-origins';
 import { CnameRecord } from 'aws-cdk-lib/aws-route53';
 
 interface FrontEndStackProps extends cdk.StackProps {
+  environment: string;
   hostedZone: cdk.aws_route53.IHostedZone;
   certificate: cdk.aws_certificatemanager.ICertificate;
   DOMAIN_NAME: string;
@@ -20,10 +21,10 @@ export class FrontEndStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: FrontEndStackProps) {
     super(scope, id, props);
 
-    const { hostedZone, certificate, DOMAIN_NAME } = props;
-    const CNAME = `optimus.${DOMAIN_NAME}`;
+    const { hostedZone, certificate, DOMAIN_NAME, environment } = props;
+    const CNAME = `${environment}optimus.${DOMAIN_NAME}`;
 
-    const bucket = new Bucket(this, 'Optimus-fe', {
+    const bucket = new Bucket(this, `${environment}Optimus-fe`, {
       blockPublicAccess: BlockPublicAccess.BLOCK_ACLS,
       accessControl: BucketAccessControl.BUCKET_OWNER_FULL_CONTROL,
     });
@@ -41,7 +42,7 @@ export class FrontEndStack extends cdk.Stack {
     );
     bucket.grantRead(originAccessIdentity);
 
-    const distribution = new Distribution(this, 'optimus-fe', {
+    const distribution = new Distribution(this, `${environment}optimus-fe`, {
       defaultRootObject: 'index.html',
       domainNames: [CNAME],
       certificate,
@@ -56,7 +57,7 @@ export class FrontEndStack extends cdk.Stack {
       },
     });
 
-    const cnameRecord = new CnameRecord(this, 'optimusCname', {
+    const cnameRecord = new CnameRecord(this, `${environment}optimusCname`, {
       zone: hostedZone,
       recordName: CNAME,
       domainName: distribution.distributionDomainName,
