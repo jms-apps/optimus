@@ -24,5 +24,9 @@ new BeStack(app, 'BeStack', {
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
 });
 
-new FrontEndStack(app, 'FrontEndStack', {});
+new FrontEndStack(app, 'FrontEndStack', {
+  hostedZone: coreStack.hostedZone,
+  certificate: coreStack.certificate,
+  DOMAIN_NAME: coreStack.DOMAIN_NAME,
+});
 new InventoryStack(app, 'InventoryStack', { api: coreStack.api });
