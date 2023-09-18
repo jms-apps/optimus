@@ -1,5 +1,6 @@
 import { createBrowserRouter, Link } from 'react-router-dom';
 import { MyInventory } from './pages/myinventory';
+import { Login } from './pages/login';
 
 export const router = createBrowserRouter([
   {
@@ -14,5 +15,9 @@ export const router = createBrowserRouter([
   {
     path: 'my-inventory',
     element: <MyInventory />,
+  },
+  {
+    path: 'login',
+    element: <Login />,
   },
 ]);
