@@ -1,7 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as appsync from 'aws-cdk-lib/aws-appsync';
-import { UserPool, VerificationEmailStyle } from 'aws-cdk-lib/aws-cognito';
 import path = require('path');
 import { CnameRecord, HostedZone } from 'aws-cdk-lib/aws-route53';
 import { Certificate } from 'aws-cdk-lib/aws-certificatemanager';
@@ -24,24 +23,6 @@ export class CoreStack extends cdk.Stack {
 
     const { environment } = props;
     const CNAME = `${environment}api.${this.DOMAIN_NAME}`;
-
-    new UserPool(this, `${environment}optimusUserPool`, {
-      userPoolName: `${environment}optimus-userpool`,
-      signInCaseSensitive: false, // case insensitive is preferred in most situations
-      selfSignUpEnabled: true,
-      userVerification: {
-        emailSubject: 'Verify your email for our awesome app!',
-        emailBody:
-          'Thanks for signing up to our awesome app! Your verification code is {####}',
-        emailStyle: VerificationEmailStyle.CODE,
-        smsMessage:
-          'Thanks for signing up to our awesome app! Your verification code is {####}',
-      },
-      signInAliases: {
-        username: true,
-        email: true,
-      },
-    });
 
     this.certificate = Certificate.fromCertificateArn(
       this,

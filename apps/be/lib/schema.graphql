@@ -10,8 +10,13 @@ type Inventory {
   minimumLevel: Int!
 }
 
+type User {
+  email: String!
+}
+
 type Query {
   getInventory: [Inventory!]
+  login(email: String!, password: String!): [User!]
 }
 
 input InventoryInput {
@@ -25,6 +30,18 @@ input InventoryInput {
   minimumLevel: Int!
 }
 
+input RegisterInput {
+  email: String!
+  password: String!
+}
+
+input VerifyEmailInput {
+  email: String!
+  code: String!
+}
+
 type Mutation {
+  register(input: RegisterInput): User
+  verifyEmail(input: VerifyEmailInput): User
   addInventory(input: InventoryInput): Inventory
 }

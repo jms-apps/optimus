@@ -6,6 +6,7 @@ import { InventoryStack } from '../lib/inventory/inventory-stack';
 import { CoreStack } from '../lib/core/core-stack';
 
 import { FrontEndStack } from '../lib/front-end/front-end-stack';
+import { UserStack } from '../lib/user/user-stack';
 
 const environment = process.env.NODE_ENV || 'dev-';
 
@@ -36,4 +37,8 @@ new FrontEndStack(app, `${environment}FrontEndStack`, {
 new InventoryStack(app, `${environment}InventoryStack`, {
   environment,
   api: coreStack.api,
+});
+new UserStack(app, `${environment}UserStack`, {
+  api: coreStack.api,
+  environment,
 });
