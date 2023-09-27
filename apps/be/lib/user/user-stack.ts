@@ -14,6 +14,8 @@ interface UserStackProps extends StackProps {
 }
 
 export class UserStack extends Stack {
+  userPoolClientId: string;
+
   constructor(scope: Construct, id: string, props: UserStackProps) {
     super(scope, id, props);
 
@@ -48,6 +50,8 @@ export class UserStack extends Stack {
         // Add more App Client settings as needed
       }
     );
+
+    this.userPoolClientId = userPoolClient.userPoolClientId;
 
     const environmentVars = {
       userPoolClientId: userPoolClient.userPoolClientId,

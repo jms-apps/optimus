@@ -6,6 +6,7 @@ import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 interface GraphqlApiProps extends cdk.StackProps {
   environment: string;
   api: cdk.aws_appsync.GraphqlApi;
+  userPoolClientId: string;
 }
 
 export class InventoryStack extends cdk.Stack {

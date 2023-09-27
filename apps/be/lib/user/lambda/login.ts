@@ -1,10 +1,10 @@
 import { CognitoIdentityServiceProvider } from 'aws-sdk';
 import { AppSyncResolverEvent } from 'aws-lambda';
-import { QueryLoginArgs } from '../../schema';
+import { User, QueryLoginArgs } from '../../schema.auto-generated';
 
 export const handler = async (
   event: AppSyncResolverEvent<QueryLoginArgs>
-): Promise<any> => {
+): Promise<User> => {
   const { email, password } = event.arguments;
   const cognito = new CognitoIdentityServiceProvider();
 
@@ -20,6 +20,7 @@ export const handler = async (
   const authResponse = await cognito.initiateAuth(authParams).promise();
 
   return {
-    authResponse,
+    email,
+    token: authResponse.AuthenticationResult?.AccessToken || '',
   };
 };

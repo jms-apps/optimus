@@ -12,36 +12,25 @@ type Inventory {
 
 type User {
   email: String!
+  token: String
 }
 
 type Query {
   getInventory: [Inventory!]
-  login(email: String!, password: String!): [User!]
-}
-
-input InventoryInput {
-  title: String!
-  barcodeNumber: Int
-  retailPrice: Int
-  purchasePrice: Int
-  stockLevel: Int!
-  inOpenOrders: Int
-  available: Int!
-  minimumLevel: Int!
-}
-
-input RegisterInput {
-  email: String!
-  password: String!
-}
-
-input VerifyEmailInput {
-  email: String!
-  code: String!
+  login(email: String!, password: String!): User
 }
 
 type Mutation {
-  register(input: RegisterInput): User
-  verifyEmail(input: VerifyEmailInput): User
-  addInventory(input: InventoryInput): Inventory
+  register(email: String!, password: String!): User
+  verifyEmail(email: String!, code: String!): User
+  addInventory(
+    title: String!
+    barcodeNumber: Int
+    retailPrice: Int
+    purchasePrice: Int
+    stockLevel: Int!
+    inOpenOrders: Int
+    available: Int!
+    minimumLevel: Int!
+  ): Inventory
 }
