@@ -2,8 +2,6 @@ import { AppSyncResolverEvent } from 'aws-lambda';
 import { handler } from './verify-email';
 import { MutationVerifyEmailArgs } from '../../schema.auto-generated';
 
-const testAccessToken = 'test-access-token';
-
 jest.mock('aws-sdk', () => {
   const actual = jest.requireActual('aws-sdk');
   return {
