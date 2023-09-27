@@ -1,8 +1,8 @@
 import { CognitoIdentityServiceProvider } from 'aws-sdk';
-import { AppSyncResolverEvent, Handler } from 'aws-lambda';
+import { AppSyncResolverEvent } from 'aws-lambda';
 import { MutationVerifyEmailArgs } from '../../schema.auto-generated';
 
-export const handler: Handler = async (
+export const handler = async (
   event: AppSyncResolverEvent<MutationVerifyEmailArgs>
 ) => {
   // Initialize AWS Cognito Identity Service Provider
