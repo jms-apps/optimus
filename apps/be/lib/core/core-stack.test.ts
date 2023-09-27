@@ -11,12 +11,6 @@ describe('CoreStack', () => {
     template = Template.fromStack(stack);
   });
 
-  it('should create userpool', () => {
-    template.hasResourceProperties('AWS::Cognito::UserPool', {
-      UserPoolName: 'test-optimus-userpool',
-    });
-  });
-
   it('should create graphql api that is accessible by env-api.sujanashah.com', () => {
     template.hasResourceProperties('AWS::AppSync::GraphQLApi', {
       AuthenticationType: 'API_KEY',

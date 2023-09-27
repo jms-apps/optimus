@@ -29,7 +29,7 @@ new FrontEndStack(app, `${environment}FrontEndStack`, {
 new InventoryStack(app, `${environment}InventoryStack`, {
   environment,
   api: coreStack.api,
-  userPoolClientId: userStack.userPoolClientId,
+  // userPoolClientId: userStack.userPoolClientId,
 });
 
 new BeStack(app, `${environment}BeStack`, {
