@@ -2,6 +2,13 @@ import { Alert, Button, TextField } from '@mui/material';
 import { PageContainer } from '../components/page-container';
 import { Controller, useForm } from 'react-hook-form';
 import { FormElement } from '../components/form-element';
+import { useMutation } from 'react-query';
+import { request, gql } from 'graphql-request';
+
+type MutationLoginArgs = {
+  email: string;
+  password: string;
+};
 
 export function Login() {
   const {
@@ -9,7 +16,12 @@ export function Login() {
     control,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data: any) => console.log(data);
+  const mutation = useMutation(handleLogin, {
+    onSuccess: () => {
+      // Invalidate and refetch
+    },
+  });
+  const onSubmit = (data: any) => mutation.mutate(data);
   return (
     <PageContainer>
       <div className="fixed left-1/2 top-1/2 -translate-x-2/4 -translate-y-2/4 w-80">
@@ -66,4 +78,31 @@ export function Login() {
       </div>
     </PageContainer>
   );
+}
+
+async function handleLogin(input: MutationLoginArgs) {
+  const { email, password } = input;
+  const document = gql`
+    mutation ($email: String!, $password: String!) {
+      login(email: $email, password: $password) {
+        email
+        token
+      }
+    }
+  `;
+  const headers = {
+    'x-api-key': 'da2-5hzzedte4bd4jdzqv4e77v4moa',
+  };
+
+  const variables = {
+    email,
+    password,
+  };
+  const values = await request(
+    'https://dev-api.sujanashah.com/graphql',
+    document,
+    variables,
+    headers
+  );
+  console.log({ values });
 }
