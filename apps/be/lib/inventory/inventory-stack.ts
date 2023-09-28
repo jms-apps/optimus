@@ -5,14 +5,14 @@ import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 
 interface GraphqlApiProps extends cdk.StackProps {
   environment: string;
-  api: cdk.aws_appsync.GraphqlApi;
+  apiId: string;
 }
 
 export class InventoryStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: GraphqlApiProps) {
     super(scope, id, props);
 
-    const { api, environment } = props;
+    const { apiId, environment } = props;
 
     const inventoryTable = new dynamodb.Table(this, `${environment}Inventory`, {
       partitionKey: {
@@ -20,6 +20,14 @@ export class InventoryStack extends cdk.Stack {
         type: dynamodb.AttributeType.STRING,
       },
     });
+
+    const api = appsync.GraphqlApi.fromGraphqlApiAttributes(
+      this,
+      'InventoryFunctionApi',
+      {
+        graphqlApiId: apiId,
+      }
+    );
 
     const inventoryDataSource = api.addDynamoDbDataSource(
       'inventoryDataSource',

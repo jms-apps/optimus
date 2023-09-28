@@ -5,7 +5,6 @@ import { UserStack } from './user-stack';
 
 describe('FrontEndStack', () => {
   let template: cdk.assertions.Template;
-  let coreStackTemplate: cdk.assertions.Template;
 
   beforeAll(() => {
     const environment = 'test-';
@@ -15,10 +14,9 @@ describe('FrontEndStack', () => {
     });
     const stack = new UserStack(app, 'FrontEndStack', {
       environment,
-      api: coreStack.api,
+      apiId: coreStack.apiId,
     });
     template = Template.fromStack(stack);
-    coreStackTemplate = Template.fromStack(coreStack);
   });
 
   it('should create userpool', () => {
@@ -34,21 +32,21 @@ describe('FrontEndStack', () => {
   });
 
   it('should create login lambda that is available as Mutation{login}', () => {
-    coreStackTemplate.hasResourceProperties('AWS::AppSync::Resolver', {
+    template.hasResourceProperties('AWS::AppSync::Resolver', {
       FieldName: 'login',
       TypeName: 'Mutation',
     });
   });
 
   it('should create register lambda that is available as Mutation{register}', () => {
-    coreStackTemplate.hasResourceProperties('AWS::AppSync::Resolver', {
+    template.hasResourceProperties('AWS::AppSync::Resolver', {
       FieldName: 'register',
       TypeName: 'Mutation',
     });
   });
 
   it('should create verify email lambda that is available as Mutation{verifyEmail}', () => {
-    coreStackTemplate.hasResourceProperties('AWS::AppSync::Resolver', {
+    template.hasResourceProperties('AWS::AppSync::Resolver', {
       FieldName: 'verifyEmail',
       TypeName: 'Mutation',
     });

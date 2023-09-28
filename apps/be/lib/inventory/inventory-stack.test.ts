@@ -5,7 +5,6 @@ import { CoreStack } from '../core/core-stack';
 
 describe('FrontEndStack', () => {
   let template: cdk.assertions.Template;
-  let coreStackTemplate: cdk.assertions.Template;
 
   beforeAll(() => {
     const environment = 'test-';
@@ -15,10 +14,9 @@ describe('FrontEndStack', () => {
     });
     const stack = new InventoryStack(app, 'FrontEndStack', {
       environment,
-      api: coreStack.api,
+      apiId: coreStack.apiId,
     });
     template = Template.fromStack(stack);
-    coreStackTemplate = Template.fromStack(coreStack);
   });
 
   it('should create dynamodb table for inventory', () => {
@@ -32,11 +30,11 @@ describe('FrontEndStack', () => {
     });
   });
   it('should create resolvers in core stack to add and get inventory', () => {
-    coreStackTemplate.hasResourceProperties('AWS::AppSync::Resolver', {
+    template.hasResourceProperties('AWS::AppSync::Resolver', {
       DataSourceName: 'inventoryDataSource',
       FieldName: 'getInventory',
     });
-    coreStackTemplate.hasResourceProperties('AWS::AppSync::Resolver', {
+    template.hasResourceProperties('AWS::AppSync::Resolver', {
       DataSourceName: 'inventoryDataSource',
       FieldName: 'addInventory',
     });

@@ -6,10 +6,11 @@ import {
 } from 'aws-cdk-lib/aws-cognito';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Construct } from 'constructs';
+import * as appsync from 'aws-cdk-lib/aws-appsync';
 import path = require('path');
 
 interface UserStackProps extends StackProps {
-  api: aws_appsync.GraphqlApi;
+  apiId: string;
   environment: string;
 }
 
@@ -19,7 +20,7 @@ export class UserStack extends Stack {
   constructor(scope: Construct, id: string, props: UserStackProps) {
     super(scope, id, props);
 
-    const { api, environment } = props;
+    const { apiId, environment } = props;
 
     const userPool = new UserPool(this, `${environment}optimusUserPool`, {
       userPoolName: `${environment}optimus-userpool`,
@@ -56,6 +57,13 @@ export class UserStack extends Stack {
     const environmentVars = {
       userPoolClientId: userPoolClient.userPoolClientId,
     };
+    const api = appsync.GraphqlApi.fromGraphqlApiAttributes(
+      this,
+      'LoginFunctionApi',
+      {
+        graphqlApiId: apiId,
+      }
+    );
 
     const loginLambda = new NodejsFunction(this, 'LoginFunction', {
       entry: `${path.join(__dirname, 'lambda/login.ts')}`,

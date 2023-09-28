@@ -16,7 +16,7 @@ const coreStack = new CoreStack(app, `${environment}CoreStack`, {
 });
 
 const userStack = new UserStack(app, `${environment}UserStack`, {
-  api: coreStack.api,
+  apiId: coreStack.apiId,
   environment,
 });
 
@@ -28,7 +28,7 @@ new FrontEndStack(app, `${environment}FrontEndStack`, {
 });
 new InventoryStack(app, `${environment}InventoryStack`, {
   environment,
-  api: coreStack.api,
+  apiId: coreStack.apiId,
   // userPoolClientId: userStack.userPoolClientId,
 });
 

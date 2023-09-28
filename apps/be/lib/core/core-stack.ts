@@ -14,7 +14,7 @@ interface CoreStackProps extends cdk.StackProps {
 }
 export class CoreStack extends cdk.Stack {
   public DOMAIN_NAME = 'sujanashah.com';
-  public api: cdk.aws_appsync.GraphqlApi;
+  public apiId: string;
   public hostedZone: cdk.aws_route53.IHostedZone;
   public certificate: cdk.aws_certificatemanager.ICertificate;
 
@@ -30,7 +30,7 @@ export class CoreStack extends cdk.Stack {
       ACM_CERT_ARN
     );
 
-    this.api = new appsync.GraphqlApi(this, `${environment}OptimusGraphql`, {
+    const api = new appsync.GraphqlApi(this, `${environment}OptimusGraphql`, {
       name: `${environment}optimusGraphql`,
       definition: appsync.Definition.fromFile(
         path.join(__dirname, '../schema.graphql')
@@ -41,6 +41,8 @@ export class CoreStack extends cdk.Stack {
         domainName: CNAME,
       },
     });
+
+    this.apiId = api.apiId;
 
     this.hostedZone = HostedZone.fromHostedZoneAttributes(
       this,
@@ -55,7 +57,7 @@ export class CoreStack extends cdk.Stack {
     new CnameRecord(this, `${environment}optimusApiRecord`, {
       recordName: CNAME,
       zone: this.hostedZone,
-      domainName: this.api.appSyncDomainName,
+      domainName: api.appSyncDomainName,
     });
   }
 }
