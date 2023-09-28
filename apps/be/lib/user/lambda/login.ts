@@ -1,9 +1,9 @@
 import { CognitoIdentityServiceProvider } from 'aws-sdk';
 import { AppSyncResolverEvent } from 'aws-lambda';
-import { User, QueryLoginArgs } from '../../schema.auto-generated';
+import { User, MutationLoginArgs } from '../../schema.auto-generated';
 
 export const handler = async (
-  event: AppSyncResolverEvent<QueryLoginArgs>
+  event: AppSyncResolverEvent<MutationLoginArgs>
 ): Promise<User> => {
   const { email, password } = event.arguments;
   const cognito = new CognitoIdentityServiceProvider();

@@ -17,10 +17,10 @@ type User {
 
 type Query {
   getInventory: [Inventory!]
-  login(email: String!, password: String!): User
 }
 
 type Mutation {
+  login(email: String!, password: String!): User
   register(email: String!, password: String!): User
   verifyEmail(email: String!, code: String!): User
   addInventory(

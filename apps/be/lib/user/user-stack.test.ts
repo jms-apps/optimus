@@ -33,10 +33,10 @@ describe('FrontEndStack', () => {
     });
   });
 
-  it('should create login lambda that is available as Query{login}', () => {
+  it('should create login lambda that is available as Mutation{login}', () => {
     coreStackTemplate.hasResourceProperties('AWS::AppSync::Resolver', {
       FieldName: 'login',
-      TypeName: 'Query',
+      TypeName: 'Mutation',
     });
   });
 

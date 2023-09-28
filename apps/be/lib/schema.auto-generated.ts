@@ -30,6 +30,7 @@ export type Inventory = {
 export type Mutation = {
   __typename?: 'Mutation';
   addInventory?: Maybe<Inventory>;
+  login?: Maybe<User>;
   register?: Maybe<User>;
   verifyEmail?: Maybe<User>;
 };
@@ -47,6 +48,12 @@ export type MutationAddInventoryArgs = {
 };
 
 
+export type MutationLoginArgs = {
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+};
+
+
 export type MutationRegisterArgs = {
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
@@ -61,13 +68,6 @@ export type MutationVerifyEmailArgs = {
 export type Query = {
   __typename?: 'Query';
   getInventory?: Maybe<Array<Inventory>>;
-  login?: Maybe<User>;
-};
-
-
-export type QueryLoginArgs = {
-  email: Scalars['String']['input'];
-  password: Scalars['String']['input'];
 };
 
 export type User = {

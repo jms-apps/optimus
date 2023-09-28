@@ -70,7 +70,7 @@ export class UserStack extends Stack {
     );
 
     loginDataSource.createResolver(`${this.environment}loginResolver`, {
-      typeName: 'Query',
+      typeName: 'Mutation',
       fieldName: 'login',
     });
 
