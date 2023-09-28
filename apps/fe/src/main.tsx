@@ -1,10 +1,12 @@
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 
-import App from './app/app';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './routes';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 const defaultTheme = createTheme({
   palette: {
@@ -20,8 +22,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <StrictMode>
-    <ThemeProvider theme={defaultTheme}>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={defaultTheme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </QueryClientProvider>
   </StrictMode>
 );
