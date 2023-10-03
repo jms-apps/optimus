@@ -1,0 +1,29 @@
+{
+  "name": "be",
+  "sourceRoot": "apps/be",
+  "projectType": "application",
+  "implicitDependencies": ["fe"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "apps/be/jest.config.js"
+      }
+    },
+    "cdk": {
+      "dependsOn": ["^build", "codegen", "test"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cdk",
+        "cwd": "apps/be"
+      }
+    },
+    "codegen": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "graphql-codegen --config codegen.ts",
+        "cwd": "apps/be"
+      }
+    }
+  }
+}

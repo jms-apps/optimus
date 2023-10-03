@@ -18,5 +18,5 @@
       "@optimus/common-ui": ["libs/common-ui/src/index.ts"]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp", "cdk.out"]
 }

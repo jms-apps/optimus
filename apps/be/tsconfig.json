@@ -1,13 +1,12 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "allowJs": false,
     "module": "commonjs",
     "lib": [
       "es2020",
       "dom"
     ],
     "declaration": true,
-    "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "noImplicitThis": true,
@@ -16,16 +15,15 @@
     "noUnusedParameters": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": false,
-    "inlineSourceMap": true,
     "inlineSources": true,
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
-    "typeRoots": [
-      "./node_modules/@types"
-    ]
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "types": ["vite/client", "vitest", "vitest/globals", "jest"],
   },
-  "exclude": [
-    "node_modules",
-    "cdk.out"
-  ]
+  "files": [],
+  "include": [],
+  "extends": "../../tsconfig.base.json"
 }
