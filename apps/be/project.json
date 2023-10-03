@@ -24,6 +24,13 @@
         "command": "graphql-codegen --config codegen.ts",
         "cwd": "apps/be"
       }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "NODE_ENV=dev- nx run be:cdk deploy dev-{args.stack}",
+        "cwd": "apps/be"
+      }
     }
   }
 }
