@@ -1,4 +1,4 @@
-import { Stack, StackProps, aws_appsync, aws_lambda } from 'aws-cdk-lib';
+import { Stack, StackProps, aws_lambda } from 'aws-cdk-lib';
 import {
   UserPool,
   UserPoolClient,
@@ -7,7 +7,7 @@ import {
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Construct } from 'constructs';
 import * as appsync from 'aws-cdk-lib/aws-appsync';
-import path = require('path');
+import * as path from 'path';
 
 interface UserStackProps extends StackProps {
   apiId: string;

@@ -4,6 +4,13 @@
   "projectType": "application",
   "implicitDependencies": ["fe"],
   "targets": {
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/be/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
@@ -11,7 +18,7 @@
       }
     },
     "cdk": {
-      "dependsOn": ["^build", "codegen", "test"],
+      "dependsOn": ["^build", "codegen", "test", "lint"],
       "executor": "nx:run-commands",
       "options": {
         "command": "cdk",
@@ -25,10 +32,17 @@
         "cwd": "apps/be"
       }
     },
-    "deploy": {
+    "deployDev": {
       "executor": "nx:run-commands",
       "options": {
         "command": "NODE_ENV=dev- nx run be:cdk deploy dev-{args.stack}",
+        "cwd": "apps/be"
+      }
+    },
+    "deployDevAll": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "NODE_ENV=dev- nx run be:cdk deploy --all",
         "cwd": "apps/be"
       }
     }
