@@ -1,6 +1,6 @@
 import { AppSyncResolverEvent } from 'aws-lambda';
 import { handler } from './register';
-import { MutationRegisterArgs } from '../../schema.auto-generated';
+import { MutationRegisterArgs } from '@optimus/common';
 
 jest.mock('aws-sdk', () => {
   const actual = jest.requireActual('aws-sdk');

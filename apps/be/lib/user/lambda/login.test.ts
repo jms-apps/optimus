@@ -1,6 +1,6 @@
 import { AppSyncResolverEvent } from 'aws-lambda';
 import { handler } from './login';
-import { MutationRegisterArgs } from '../../schema.auto-generated';
+import { MutationRegisterArgs } from '@optimus/common';
 
 const testAccessToken = 'test-access-token';
 

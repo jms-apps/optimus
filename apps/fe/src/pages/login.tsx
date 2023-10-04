@@ -4,6 +4,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { FormElement } from '../components/form-element';
 import { useMutation } from 'react-query';
 import { request, gql } from 'graphql-request';
+import { User } from '@optimus/common';
 
 type MutationLoginArgs = {
   email: string;
@@ -17,7 +18,8 @@ export function Login() {
     formState: { errors },
   } = useForm();
   const mutation = useMutation(handleLogin, {
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log({ data });
       // Invalidate and refetch
     },
   });
@@ -98,11 +100,11 @@ async function handleLogin(input: MutationLoginArgs) {
     email,
     password,
   };
-  const values = await request(
+  const { token } = await request<User>(
     'https://dev-api.sujanashah.com/graphql',
     document,
     variables,
     headers
   );
-  console.log({ values });
+  localStorage.setItem('token', token || '');
 }

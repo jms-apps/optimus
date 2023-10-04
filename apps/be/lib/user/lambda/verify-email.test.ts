@@ -1,6 +1,6 @@
 import { AppSyncResolverEvent } from 'aws-lambda';
 import { handler } from './verify-email';
-import { MutationVerifyEmailArgs } from '../../schema.auto-generated';
+import { MutationVerifyEmailArgs } from '@optimus/common';
 
 jest.mock('aws-sdk', () => {
   const actual = jest.requireActual('aws-sdk');

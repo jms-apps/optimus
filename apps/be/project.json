@@ -2,7 +2,7 @@
   "name": "be",
   "sourceRoot": "apps/be",
   "projectType": "application",
-  "implicitDependencies": ["fe"],
+  "implicitDependencies": ["fe", "common"],
   "targets": {
     "lint": {
       "executor": "@nx/linter:eslint",

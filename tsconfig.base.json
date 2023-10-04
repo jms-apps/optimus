@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@optimus/common": ["libs/common/src/index.ts"],
       "@optimus/common-ui": ["libs/common-ui/src/index.ts"]
     }
   },

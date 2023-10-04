@@ -1,6 +1,6 @@
 import { CognitoIdentityServiceProvider } from 'aws-sdk';
 import { AppSyncResolverEvent } from 'aws-lambda';
-import { User, MutationLoginArgs } from '../../schema.auto-generated';
+import { User, MutationLoginArgs } from '@optimus/common';
 
 export const handler = async (
   event: AppSyncResolverEvent<MutationLoginArgs>
