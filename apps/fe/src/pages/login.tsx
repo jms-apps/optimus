@@ -3,8 +3,10 @@ import { PageContainer } from '../components/page-container';
 import { Controller, useForm } from 'react-hook-form';
 import { FormElement } from '../components/form-element';
 import { useMutation } from 'react-query';
-import { request, gql } from 'graphql-request';
+import { gql } from 'graphql-request';
 import { User } from '@optimus/common';
+import { optimusRequest } from '../helpers/request';
+import { useNavigate } from 'react-router-dom';
 
 type MutationLoginArgs = {
   email: string;
@@ -12,15 +14,15 @@ type MutationLoginArgs = {
 };
 
 export function Login() {
+  const navigate = useNavigate();
   const {
     handleSubmit,
     control,
     formState: { errors },
   } = useForm();
   const mutation = useMutation(handleLogin, {
-    onSuccess: (data) => {
-      console.log({ data });
-      // Invalidate and refetch
+    onSuccess: () => {
+      navigate('/my-inventory');
     },
   });
   const onSubmit = (data: any) => mutation.mutate(data);
@@ -92,19 +94,12 @@ async function handleLogin(input: MutationLoginArgs) {
       }
     }
   `;
-  const headers = {
-    'x-api-key': 'da2-5hzzedte4bd4jdzqv4e77v4moa',
-  };
-
   const variables = {
     email,
     password,
   };
-  const { token } = await request<User>(
-    'https://dev-api.sujanashah.com/graphql',
-    document,
-    variables,
-    headers
-  );
+  const {
+    login: { token },
+  } = await optimusRequest<{ login: User }>(document, variables);
   localStorage.setItem('token', token || '');
 }
