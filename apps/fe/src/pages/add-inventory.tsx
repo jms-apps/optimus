@@ -54,6 +54,7 @@ export function AddInventory() {
               render={({ field }) => (
                 <TextField
                   label="Barcode Number"
+                  type="number"
                   variant="outlined"
                   {...field}
                   fullWidth
@@ -77,6 +78,7 @@ export function AddInventory() {
               render={({ field }) => (
                 <TextField
                   label="Retail Price"
+                  type="number"
                   variant="outlined"
                   {...field}
                   fullWidth
@@ -98,6 +100,7 @@ export function AddInventory() {
               render={({ field }) => (
                 <TextField
                   label="Purchase Price"
+                  type="number"
                   variant="outlined"
                   {...field}
                   fullWidth
@@ -122,6 +125,7 @@ export function AddInventory() {
                 <TextField
                   label="Stock Level"
                   variant="outlined"
+                  type="number"
                   {...field}
                   fullWidth
                 />
@@ -143,6 +147,7 @@ export function AddInventory() {
                 <TextField
                   label="Available units"
                   variant="outlined"
+                  type="number"
                   {...field}
                   fullWidth
                 />
@@ -164,6 +169,7 @@ export function AddInventory() {
                 <TextField
                   label="Minimum Level"
                   variant="outlined"
+                  type="number"
                   {...field}
                   fullWidth
                 />
