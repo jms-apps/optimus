@@ -199,13 +199,15 @@ async function handleAddInventory(input: MutationAddInventoryArgs) {
       $minimumLevel: Int!
     ) {
       addInventory(
-        title: $title
-        barcodeNumber: $barcodeNumber
-        retailPrice: $retailPrice
-        purchasePrice: $purchasePrice
-        stockLevel: $stockLevel
-        available: $available
-        minimumLevel: $minimumLevel
+        input: {
+          title: $title
+          barcodeNumber: $barcodeNumber
+          retailPrice: $retailPrice
+          purchasePrice: $purchasePrice
+          stockLevel: $stockLevel
+          available: $available
+          minimumLevel: $minimumLevel
+        }
       ) {
         sku
       }

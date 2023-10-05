@@ -27,6 +27,17 @@ export type Inventory = {
   title: Scalars['String']['output'];
 };
 
+export type InventoryInput = {
+  available: Scalars['Int']['input'];
+  barcodeNumber?: InputMaybe<Scalars['Int']['input']>;
+  inOpenOrders?: InputMaybe<Scalars['Int']['input']>;
+  minimumLevel: Scalars['Int']['input'];
+  purchasePrice?: InputMaybe<Scalars['Float']['input']>;
+  retailPrice?: InputMaybe<Scalars['Float']['input']>;
+  stockLevel: Scalars['Int']['input'];
+  title: Scalars['String']['input'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addInventory?: Maybe<Inventory>;
@@ -37,14 +48,7 @@ export type Mutation = {
 
 
 export type MutationAddInventoryArgs = {
-  available: Scalars['Int']['input'];
-  barcodeNumber?: InputMaybe<Scalars['Int']['input']>;
-  inOpenOrders?: InputMaybe<Scalars['Int']['input']>;
-  minimumLevel: Scalars['Int']['input'];
-  purchasePrice?: InputMaybe<Scalars['Float']['input']>;
-  retailPrice?: InputMaybe<Scalars['Float']['input']>;
-  stockLevel: Scalars['Int']['input'];
-  title: Scalars['String']['input'];
+  input?: InputMaybe<InventoryInput>;
 };
 
 

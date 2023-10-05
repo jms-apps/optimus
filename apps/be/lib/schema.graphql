@@ -1,3 +1,14 @@
+input InventoryInput {
+  title: String!
+  barcodeNumber: Int
+  retailPrice: Float
+  purchasePrice: Float
+  stockLevel: Int!
+  inOpenOrders: Int
+  available: Int!
+  minimumLevel: Int!
+}
+
 type Inventory {
   sku: String!
   title: String!
@@ -23,14 +34,5 @@ type Mutation {
   login(email: String!, password: String!): User
   register(email: String!, password: String!): User
   verifyEmail(email: String!, code: String!): User
-  addInventory(
-    title: String!
-    barcodeNumber: Int
-    retailPrice: Float
-    purchasePrice: Float
-    stockLevel: Int!
-    inOpenOrders: Int
-    available: Int!
-    minimumLevel: Int!
-  ): Inventory
+  addInventory(input: InventoryInput): Inventory
 }
