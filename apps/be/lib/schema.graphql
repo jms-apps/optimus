@@ -2,8 +2,8 @@ type Inventory {
   sku: String!
   title: String!
   barcodeNumber: Int
-  retailPrice: Int
-  purchasePrice: Int
+  retailPrice: Float
+  purchasePrice: Float
   stockLevel: Int!
   inOpenOrders: Int
   available: Int!
@@ -26,8 +26,8 @@ type Mutation {
   addInventory(
     title: String!
     barcodeNumber: Int
-    retailPrice: Int
-    purchasePrice: Int
+    retailPrice: Float
+    purchasePrice: Float
     stockLevel: Int!
     inOpenOrders: Int
     available: Int!

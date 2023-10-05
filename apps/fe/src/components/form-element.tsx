@@ -3,5 +3,5 @@ interface FormElementProps {
 }
 
 export function FormElement({ children }: FormElementProps) {
-  return <div className="p-2">{children}</div>;
+  return <div className="p-2 w-full">{children}</div>;
 }

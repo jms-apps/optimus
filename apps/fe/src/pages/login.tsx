@@ -4,14 +4,9 @@ import { Controller, useForm } from 'react-hook-form';
 import { FormElement } from '../components/form-element';
 import { useMutation } from 'react-query';
 import { gql } from 'graphql-request';
-import { User } from '@optimus/common';
+import { User, MutationLoginArgs } from '@optimus/common';
 import { optimusRequest } from '../helpers/request';
 import { useNavigate } from 'react-router-dom';
-
-type MutationLoginArgs = {
-  email: string;
-  password: string;
-};
 
 export function Login() {
   const navigate = useNavigate();
