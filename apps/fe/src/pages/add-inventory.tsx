@@ -20,6 +20,9 @@ export function AddInventory() {
     onSuccess: () => {
       navigate('/my-inventory');
     },
+    onError: (error) => {
+      console.log(error);
+    },
   });
   const onSubmit = (data: any) => mutation.mutate(data);
   return (
@@ -29,6 +32,7 @@ export function AddInventory() {
         <div className="flex">
           <FormElement>
             <Controller
+              defaultValue={''}
               name="title"
               control={control}
               rules={{ required: 'Please enter title' }}
@@ -48,6 +52,7 @@ export function AddInventory() {
           </FormElement>
           <FormElement>
             <Controller
+              defaultValue={''}
               name="barcodeNumber"
               control={control}
               rules={{ required: 'Please enter Barcode Number' }}
@@ -72,6 +77,7 @@ export function AddInventory() {
         <div className="flex">
           <FormElement>
             <Controller
+              defaultValue={''}
               name="retailPrice"
               control={control}
               rules={{ required: 'Please enter Retail Price' }}
@@ -94,6 +100,7 @@ export function AddInventory() {
           </FormElement>
           <FormElement>
             <Controller
+              defaultValue={''}
               name="purchasePrice"
               control={control}
               rules={{ required: 'Please enter Purchase Price' }}
@@ -118,6 +125,7 @@ export function AddInventory() {
         <div className="flex">
           <FormElement>
             <Controller
+              defaultValue={''}
               name="stockLevel"
               control={control}
               rules={{ required: 'Please enter Stock Level' }}
@@ -140,6 +148,7 @@ export function AddInventory() {
           </FormElement>
           <FormElement>
             <Controller
+              defaultValue={''}
               name="available"
               control={control}
               rules={{ required: 'Please enter Available' }}
@@ -162,6 +171,7 @@ export function AddInventory() {
           </FormElement>
           <FormElement>
             <Controller
+              defaultValue={''}
               name="minimumLevel"
               control={control}
               rules={{ required: 'Please enter Minimum Level' }}
@@ -201,7 +211,7 @@ async function handleAddInventory(input: MutationAddInventoryArgs) {
       $retailPrice: Float
       $purchasePrice: Float
       $stockLevel: Int!
-      $available: Int!
+      $available: Int
       $minimumLevel: Int!
     ) {
       addInventory(

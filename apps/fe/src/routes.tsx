@@ -3,7 +3,7 @@ import { MyInventory } from './pages/myinventory';
 import { Login } from './pages/login';
 import { AddInventory } from './pages/add-inventory';
 
-export const router = createBrowserRouter([
+export const routesConfig = [
   {
     path: '/',
     element: (
@@ -25,4 +25,6 @@ export const router = createBrowserRouter([
     path: 'login',
     element: <Login />,
   },
-]);
+];
+
+export const router = createBrowserRouter(routesConfig);
