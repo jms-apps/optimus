@@ -1,6 +1,8 @@
 // src/mocks/handlers.js
 import { graphql } from 'msw';
 
+export const VALID_TOKEN_VALUE = 'test-token';
+
 export const handlers = [
   graphql.mutation('AddInventory', (req, res, ctx) => {
     return res(
@@ -15,7 +17,7 @@ export const handlers = [
     return res(
       ctx.data({
         login: {
-          token: 'your-token-value', // Set the desired SKU value
+          token: VALID_TOKEN_VALUE, // Set the desired SKU value
         },
       })
     );
