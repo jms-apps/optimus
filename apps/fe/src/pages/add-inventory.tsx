@@ -205,13 +205,13 @@ export function AddInventory() {
 
 async function handleAddInventory(input: MutationAddInventoryArgs) {
   const graphql = gql`
-    mutation (
+    mutation AddInventory(
       $title: String!
       $barcodeNumber: Int
       $retailPrice: Float
       $purchasePrice: Float
       $stockLevel: Int!
-      $available: Int
+      $available: Int!
       $minimumLevel: Int!
     ) {
       addInventory(

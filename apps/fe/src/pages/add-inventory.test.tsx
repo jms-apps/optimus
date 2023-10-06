@@ -1,8 +1,18 @@
 import { fireEvent, screen } from '@testing-library/react';
 import { renderWithRouter } from '../helpers/test-helpers';
 
+import { server } from '../mocks/server';
+
 describe('Add inventory', () => {
-  it('should add all the details successfully', () => {
+  beforeAll(() => {
+    return server.listen();
+  });
+
+  afterEach(() => server.resetHandlers());
+
+  afterAll(() => server.close());
+
+  it('should add all the details successfully', async () => {
     renderWithRouter('/add-inventory');
 
     fireEvent.change(screen.getByLabelText('Title'), {
@@ -27,9 +37,9 @@ describe('Add inventory', () => {
       target: { value: 10 },
     });
 
-    fireEvent.click(screen.getByText('Add'));
+    fireEvent.click(screen.getByRole('button'));
 
-    expect(screen.getByLabelText('Title')).toBeInTheDocument();
+    expect(await screen.findByText('My Inventory')).toBeInTheDocument();
   });
   //   it('should not submit is mandatory details are missing', () => {});
   //   it('should display error when add inventory failed', () => {});
