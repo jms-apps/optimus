@@ -28,6 +28,7 @@ export function Login() {
         <form className="" onSubmit={handleSubmit(onSubmit)}>
           <FormElement>
             <Controller
+              defaultValue={''}
               name="email"
               control={control}
               rules={{ required: 'Please enter email' }}
@@ -49,6 +50,7 @@ export function Login() {
           <FormElement>
             <Controller
               name="password"
+              defaultValue={''}
               control={control}
               rules={{ required: 'Please enter password' }}
               render={({ field }) => (
@@ -82,7 +84,7 @@ export function Login() {
 async function handleLogin(input: MutationLoginArgs) {
   const { email, password } = input;
   const document = gql`
-    mutation ($email: String!, $password: String!) {
+    mutation Login($email: String!, $password: String!) {
       login(email: $email, password: $password) {
         email
         token
