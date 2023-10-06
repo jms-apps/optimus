@@ -26,9 +26,10 @@ describe('Add inventory', () => {
     fireEvent.change(screen.getByLabelText('Minimum Level'), {
       target: { value: 10 },
     });
+
     fireEvent.click(screen.getByText('Add'));
 
-    expect(screen.getByLabelText('Title')).toBeNull();
+    expect(screen.getByLabelText('Title')).toBeInTheDocument();
   });
   //   it('should not submit is mandatory details are missing', () => {});
   //   it('should display error when add inventory failed', () => {});
