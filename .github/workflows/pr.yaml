@@ -1,0 +1,38 @@
+name: PR level CI
+
+on:
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run lint BE
+        run: nx run be:lint
+
+      - name: Run lint FE
+        run: nx run fe:lint
+
+      - name: Run tests BE
+        run: nx run be:test
+
+      - name: Run test FE
+        run: nx run fe:test
