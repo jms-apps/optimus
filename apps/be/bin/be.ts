@@ -15,7 +15,7 @@ const coreStack = new CoreStack(app, `${environment}CoreStack`, {
   environment,
 });
 
-const userStack = new UserStack(app, `${environment}UserStack`, {
+new UserStack(app, `${environment}UserStack`, {
   apiId: coreStack.apiId,
   environment,
 });

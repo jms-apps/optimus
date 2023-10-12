@@ -1,3 +1,4 @@
+/* eslint-disable jest/expect-expect */
 import * as cdk from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
 import { CoreStack } from './core-stack';
