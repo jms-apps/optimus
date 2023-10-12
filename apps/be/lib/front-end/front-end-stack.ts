@@ -7,7 +7,11 @@ import {
   BucketAccessControl,
 } from 'aws-cdk-lib/aws-s3';
 import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
-import { Distribution, OriginAccessIdentity } from 'aws-cdk-lib/aws-cloudfront';
+import {
+  CachePolicy,
+  Distribution,
+  OriginAccessIdentity,
+} from 'aws-cdk-lib/aws-cloudfront';
 import { S3Origin } from 'aws-cdk-lib/aws-cloudfront-origins';
 import { CnameRecord } from 'aws-cdk-lib/aws-route53';
 
@@ -34,6 +38,7 @@ export class FrontEndStack extends cdk.Stack {
       sources: [
         Source.asset(path.resolve(__dirname, '../../../../dist/apps/fe')),
       ],
+      prune: true,
     });
 
     const originAccessIdentity = new OriginAccessIdentity(
@@ -41,6 +46,14 @@ export class FrontEndStack extends cdk.Stack {
       'OriginAccessIdentity'
     );
     bucket.grantRead(originAccessIdentity);
+
+    const cachePolicy = new CachePolicy(
+      this,
+      `${environment}optimusCachePolicy`,
+      {
+        defaultTtl: cdk.Duration.seconds(60),
+      }
+    );
 
     const distribution = new Distribution(this, `${environment}optimus-fe`, {
       defaultRootObject: 'index.html',
@@ -54,6 +67,7 @@ export class FrontEndStack extends cdk.Stack {
       ],
       defaultBehavior: {
         origin: new S3Origin(bucket, { originAccessIdentity }),
+        cachePolicy,
       },
     });
 
