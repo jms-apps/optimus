@@ -1,0 +1,38 @@
+input InventoryInput {
+  title: String!
+  barcodeNumber: Int
+  retailPrice: Float
+  purchasePrice: Float
+  stockLevel: Int!
+  inOpenOrders: Int
+  available: Int!
+  minimumLevel: Int!
+}
+
+type Inventory {
+  sku: String!
+  title: String!
+  barcodeNumber: Int
+  retailPrice: Float
+  purchasePrice: Float
+  stockLevel: Int!
+  inOpenOrders: Int
+  available: Int!
+  minimumLevel: Int!
+}
+
+type User {
+  email: String!
+  token: String
+}
+
+type Query {
+  getInventory: [Inventory!]
+}
+
+type Mutation {
+  login(email: String!, password: String!): User
+  register(email: String!, password: String!): User
+  verifyEmail(email: String!, code: String!): User
+  addInventory(input: InventoryInput): Inventory
+}
