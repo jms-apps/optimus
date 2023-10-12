@@ -25,14 +25,5 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run lint BE
-        run: nx run be:lint
-
-      - name: Run lint FE
-        run: nx run fe:lint
-
-      - name: Run tests BE
-        run: nx run be:test
-
-      - name: Run test FE
-        run: nx run fe:test
+      - name: Run lint, test and check if GRAPHQL has no errors
+        run: npx nx run-many -t lint test codegen -p be
