@@ -33,27 +33,11 @@ export class FrontEndStack extends cdk.Stack {
       accessControl: BucketAccessControl.BUCKET_OWNER_FULL_CONTROL,
     });
 
-    new BucketDeployment(this, 'optimus-fe-bucket-deployment', {
-      destinationBucket: bucket,
-      sources: [
-        Source.asset(path.resolve(__dirname, '../../../../dist/apps/fe')),
-      ],
-      prune: true,
-    });
-
     const originAccessIdentity = new OriginAccessIdentity(
       this,
       'OriginAccessIdentity'
     );
     bucket.grantRead(originAccessIdentity);
-
-    const cachePolicy = new CachePolicy(
-      this,
-      `${environment}optimusCachePolicy`,
-      {
-        defaultTtl: cdk.Duration.seconds(60),
-      }
-    );
 
     const distribution = new Distribution(this, `${environment}optimus-fe`, {
       defaultRootObject: 'index.html',
@@ -67,8 +51,15 @@ export class FrontEndStack extends cdk.Stack {
       ],
       defaultBehavior: {
         origin: new S3Origin(bucket, { originAccessIdentity }),
-        cachePolicy,
       },
+    });
+
+    new BucketDeployment(this, 'optimus-fe-bucket-deployment', {
+      destinationBucket: bucket,
+      sources: [
+        Source.asset(path.resolve(__dirname, '../../../../dist/apps/fe')),
+      ],
+      distribution,
     });
 
     const cnameRecord = new CnameRecord(this, `${environment}optimusCname`, {
