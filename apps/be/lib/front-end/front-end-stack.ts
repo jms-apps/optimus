@@ -7,11 +7,7 @@ import {
   BucketAccessControl,
 } from 'aws-cdk-lib/aws-s3';
 import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
-import {
-  CachePolicy,
-  Distribution,
-  OriginAccessIdentity,
-} from 'aws-cdk-lib/aws-cloudfront';
+import { Distribution, OriginAccessIdentity } from 'aws-cdk-lib/aws-cloudfront';
 import { S3Origin } from 'aws-cdk-lib/aws-cloudfront-origins';
 import { CnameRecord } from 'aws-cdk-lib/aws-route53';
 
