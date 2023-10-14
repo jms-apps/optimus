@@ -12,6 +12,7 @@
       }
     },
     "test": {
+      "dependsOn": ["^build"],
       "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "apps/be/jest.config.js"
