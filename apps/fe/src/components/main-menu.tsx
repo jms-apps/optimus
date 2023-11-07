@@ -33,7 +33,6 @@ export function MainMenu() {
     setMenu({});
   };
   const addInventory = () => {
-    console.log('add inventory called');
     handleClose();
     navigate('/add-inventory');
   };
