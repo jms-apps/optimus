@@ -3,7 +3,15 @@ import { App } from '../app';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import { routesConfig } from '../routes';
 
-export const renderWithRouter = (route = '/') => {
+interface RenderWithRouterOptionalParams {
+  withLogin?: true;
+}
+
+export const renderWithRouter = (
+  route = '/',
+  { withLogin }: RenderWithRouterOptionalParams = {}
+) => {
+  if (withLogin) localStorage.setItem('token', 'valid-token');
   const router = createMemoryRouter(routesConfig, {
     initialEntries: [route],
   });

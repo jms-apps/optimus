@@ -8,6 +8,7 @@ import { optimusRequest } from '../helpers/request';
 import { useNavigate } from 'react-router-dom';
 import { PageTitle } from '../components/page-title';
 import { Inventory, MutationAddInventoryArgs } from '@optimus/common';
+import { useAlertStore } from '../helpers/store';
 
 export function AddInventory() {
   const navigate = useNavigate();
@@ -16,15 +17,22 @@ export function AddInventory() {
     control,
     formState: { errors },
   } = useForm();
+
+  const { showAlert } = useAlertStore(({ showAlert }) => ({
+    showAlert,
+  }));
+
   const mutation = useMutation(handleAddInventory, {
     onSuccess: () => {
+      showAlert({ message: 'Inventory added', severity: 'success' });
       navigate('/my-inventory');
     },
-    onError: (error) => {
-      console.log(error);
+    onError: () => {
+      showAlert({ message: 'Inventory add failed', severity: 'error' });
     },
   });
   const onSubmit = (data: any) => mutation.mutate(data);
+
   return (
     <PageContainer>
       <PageTitle title="Add Inventory" />

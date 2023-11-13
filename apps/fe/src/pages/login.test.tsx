@@ -29,4 +29,11 @@ describe('Login', () => {
       await screen.findByRole('button', { name: 'Login' })
     ).toBeInTheDocument();
   });
+
+  it('should not display menu', async () => {
+    renderWithRouter('/login');
+    expect(
+      await screen.queryByLabelText('profile-menu')
+    ).not.toBeInTheDocument();
+  });
 });

@@ -33,7 +33,6 @@ export function MainMenu() {
     setMenu({});
   };
   const addInventory = () => {
-    console.log('add inventory called');
     handleClose();
     navigate('/add-inventory');
   };
@@ -65,7 +64,7 @@ export function MainMenu() {
           }
           onClick={(event) => handleClick(event, MENU_LIST.ProfileMenu)}
         >
-          <AccountCircleIcon />
+          <AccountCircleIcon aria-label={MENU_LIST.ProfileMenu} />
         </Button>
         <Menu
           id={MENU_LIST.ProfileMenu}
@@ -98,7 +97,7 @@ export function MainMenu() {
           }
           onClick={(event) => handleClick(event, MENU_LIST.InventoryMenu)}
         >
-          <InventoryIcon />
+          <InventoryIcon aria-label={MENU_LIST.InventoryMenu} />
         </Button>
         <Menu
           id={MENU_LIST.InventoryMenu}
