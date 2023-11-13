@@ -27,7 +27,7 @@ export function PageContainer({ children }: PageContainerProps) {
 
   useEffect(() => {
     if (!token && location.pathname !== '/login') navigate('/login');
-    if (token && location.pathname == '/login') navigate('/my-inventory');
+    if (token && location.pathname === '/login') navigate('/my-inventory');
   }, [location.pathname, navigate, token]);
 
   return (
@@ -45,7 +45,7 @@ export function PageContainer({ children }: PageContainerProps) {
                 size="small"
                 onClick={hideAlert}
               >
-                <CloseIcon fontSize="inherit" />
+                <CloseIcon fontSize="inherit" aria-label="close alert" />
               </IconButton>
             }
             sx={{ mb: 2 }}

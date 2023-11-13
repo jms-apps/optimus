@@ -24,9 +24,10 @@ export function AddInventory() {
 
   const mutation = useMutation(handleAddInventory, {
     onSuccess: () => {
+      showAlert({ message: 'Inventory added', severity: 'success' });
       navigate('/my-inventory');
     },
-    onError: (error) => {
+    onError: () => {
       showAlert({ message: 'Inventory add failed', severity: 'error' });
     },
   });

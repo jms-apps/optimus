@@ -1,9 +1,9 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { findByLabelText, fireEvent, screen } from '@testing-library/react';
 import { renderWithRouter } from '../helpers/test-helpers';
 
 describe('Add inventory', () => {
-  it('should add all the details successfully', async () => {
-    renderWithRouter('/add-inventory');
+  it('should add all the details successfully and display alert, hide alert when hide button is clicked', async () => {
+    renderWithRouter('/add-inventory', { withLogin: true });
 
     fireEvent.change(screen.getByLabelText('Title'), {
       target: { value: 'test-title' },
@@ -27,16 +27,25 @@ describe('Add inventory', () => {
       target: { value: 10 },
     });
 
-    fireEvent.click(screen.getByRole('button'));
+    fireEvent.click(screen.getByRole('button', { name: /ADD/i }));
 
     expect(await screen.findByText('My Inventory')).toBeInTheDocument();
+    expect(await screen.findByText('Inventory added')).toBeInTheDocument();
+
+    fireEvent.click(await screen.findByLabelText('close alert'));
+    expect(screen.queryByText('Inventory added')).not.toBeInTheDocument();
   });
+
   it('should not submit when mandatory details are missing and should display error', async () => {
-    renderWithRouter('/add-inventory');
+    renderWithRouter('/add-inventory', { withLogin: true });
     expect(screen.queryByText('Please enter title')).not.toBeInTheDocument();
-    fireEvent.click(screen.getByRole('button'));
+    fireEvent.click(screen.getByRole('button', { name: /ADD/i }));
 
     expect(await screen.findByText('Please enter title')).toBeInTheDocument();
     expect(await screen.findByText('Add Inventory')).toBeInTheDocument();
+  });
+  it('should display menu', async () => {
+    renderWithRouter('/add-inventory', { withLogin: true });
+    expect(screen.queryByLabelText('profile-menu')).toBeInTheDocument();
   });
 });
