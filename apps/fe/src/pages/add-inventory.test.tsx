@@ -1,4 +1,4 @@
-import { findByLabelText, fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import { renderWithRouter } from '../helpers/test-helpers';
 
 describe('Add inventory', () => {
@@ -44,8 +44,41 @@ describe('Add inventory', () => {
     expect(await screen.findByText('Please enter title')).toBeInTheDocument();
     expect(await screen.findByText('Add Inventory')).toBeInTheDocument();
   });
-  it('should display menu', async () => {
-    renderWithRouter('/add-inventory', { withLogin: true });
-    expect(screen.queryByLabelText('profile-menu')).toBeInTheDocument();
+
+  describe('Menu', () => {
+    it('should display menu', async () => {
+      renderWithRouter('/add-inventory', { withLogin: true });
+      expect(screen.queryByLabelText('profile-menu')).toBeInTheDocument();
+    });
+
+    it('should redirect to login page if logout is clicked', async () => {
+      renderWithRouter('/add-inventory', { withLogin: true });
+      expect(screen.queryByText(/Login/i)).not.toBeInTheDocument();
+      fireEvent.click(screen.getByLabelText('profile-menu'));
+      fireEvent.click(await screen.findByText('Logout'));
+
+      expect(
+        await screen.findByRole('button', { name: 'Login' })
+      ).toBeInTheDocument();
+    });
+
+    it('should redirect to my inventory page if view inventory is clicked', async () => {
+      renderWithRouter('/add-inventory', { withLogin: true });
+      expect(screen.queryByText(/My Inventory/i)).not.toBeInTheDocument();
+      fireEvent.click(screen.getByLabelText('inventory-menu'));
+      fireEvent.click(await screen.findByText(/View Inventory/i));
+
+      expect(await screen.findByText(/My Inventory/i)).toBeInTheDocument();
+    });
+
+    it('should redirect to add inventory page if add inventory is clicked', async () => {
+      renderWithRouter('/my-inventory', { withLogin: true });
+      expect(screen.queryByText(/Add Inventory/i)).not.toBeInTheDocument();
+
+      fireEvent.click(screen.getByLabelText('inventory-menu'));
+      fireEvent.click(await screen.findByText(/Add Inventory/i));
+
+      expect(await screen.findByText(/Add Inventory/i)).toBeInTheDocument();
+    });
   });
 });
