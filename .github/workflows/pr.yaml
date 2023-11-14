@@ -26,4 +26,4 @@ jobs:
         run: npm install
 
       - name: Run lint, test and check if GRAPHQL has no errors
-        run: npx nx run-many -t lint test codegen -p be
+        run: npx nx run-many -t lint test codegen -p be fe
