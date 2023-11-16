@@ -1,13 +1,16 @@
 import { handler } from './check-token';
 import { AppSyncResolverEvent } from 'aws-lambda';
 import { MutationCheckTokenArgs } from '@optimus/common';
+import { CognitoIdentityServiceProvider } from 'aws-sdk';
 
 jest.mock('aws-sdk', () => {
   const actual = jest.requireActual('aws-sdk');
   return {
     ...actual,
     CognitoIdentityServiceProvider: jest.fn(() => ({
-      getUser: ({ AccessToken }: any) => ({
+      getUser: ({
+        AccessToken,
+      }: CognitoIdentityServiceProvider.GetUserRequest) => ({
         promise: () => {
           if (AccessToken === 'invalid-token')
             throw new Error('Token is not valid');
