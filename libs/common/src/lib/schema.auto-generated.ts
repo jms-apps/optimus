@@ -41,6 +41,7 @@ export type InventoryInput = {
 export type Mutation = {
   __typename?: 'Mutation';
   addInventory?: Maybe<Inventory>;
+  checkToken?: Maybe<TokenValidity>;
   login?: Maybe<User>;
   register?: Maybe<User>;
   verifyEmail?: Maybe<User>;
@@ -49,6 +50,11 @@ export type Mutation = {
 
 export type MutationAddInventoryArgs = {
   input?: InputMaybe<InventoryInput>;
+};
+
+
+export type MutationCheckTokenArgs = {
+  token?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -72,6 +78,11 @@ export type MutationVerifyEmailArgs = {
 export type Query = {
   __typename?: 'Query';
   getInventory?: Maybe<Array<Inventory>>;
+};
+
+export type TokenValidity = {
+  __typename?: 'TokenValidity';
+  isValid: Scalars['Boolean']['output'];
 };
 
 export type User = {

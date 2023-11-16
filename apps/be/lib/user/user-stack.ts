@@ -118,5 +118,25 @@ export class UserStack extends Stack {
         fieldName: 'verifyEmail',
       }
     );
+
+    const checkTokenLambda = new NodejsFunction(this, 'checkTokenFunction', {
+      entry: `${path.join(__dirname, 'lambda/check-token.ts')}`,
+      handler: 'handler',
+      architecture: aws_lambda.Architecture.ARM_64,
+      environment: environmentVars,
+    });
+
+    const checkTokenDataSource = api.addLambdaDataSource(
+      'checkTokenDataSource',
+      checkTokenLambda
+    );
+
+    checkTokenDataSource.createResolver(
+      `${this.environment}checkTokenResolver`,
+      {
+        typeName: 'Mutation',
+        fieldName: 'checkToken',
+      }
+    );
   }
 }
