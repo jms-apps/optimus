@@ -26,6 +26,10 @@ type User {
   token: String
 }
 
+type TokenValidity {
+  isValid: Boolean!
+}
+
 type Query {
   getInventory: [Inventory!]
 }
@@ -34,5 +38,6 @@ type Mutation {
   login(email: String!, password: String!): User
   register(email: String!, password: String!): User
   verifyEmail(email: String!, code: String!): User
+  checkToken(token: String): TokenValidity
   addInventory(input: InventoryInput): Inventory
 }
