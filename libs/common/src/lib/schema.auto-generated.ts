@@ -34,6 +34,7 @@ export type InventoryInput = {
   minimumLevel: Scalars['Int']['input'];
   purchasePrice?: InputMaybe<Scalars['Float']['input']>;
   retailPrice?: InputMaybe<Scalars['Float']['input']>;
+  sku?: InputMaybe<Scalars['String']['input']>;
   stockLevel: Scalars['Int']['input'];
   title: Scalars['String']['input'];
 };
