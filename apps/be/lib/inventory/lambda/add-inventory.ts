@@ -18,29 +18,34 @@ const addInventory = async (
   const dynamodb = new DynamoDB.DocumentClient();
   const inventory = event.arguments.input;
 
-  if (!inventory?.sku) {
-    inventory.sku = crypto.randomBytes(8).toString('hex').substring(0, 8);
+  if (!inventory) {
+    throw new OptimusError('Inventory input is not provided');
   }
 
-  const hasItem = await dynamodb
-    .get({
-      TableName: process.env.inventoryTableName as string,
-      Key: {
-        sku: inventory.sku,
-      },
-    })
-    .promise();
-  if (hasItem.Item)
-    throw new OptimusError(
-      `Inventory with sku ${inventory.sku} already exists`
-    );
+  if (!inventory?.sku) {
+    inventory.sku = crypto.randomBytes(8).toString('hex').substring(0, 8);
+  } else {
+    const hasItem = await dynamodb
+      .get({
+        TableName: process.env.inventoryTableName as string,
+        Key: {
+          sku: inventory.sku,
+        },
+      })
+      .promise();
+    if (hasItem.Item)
+      throw new OptimusError(
+        `Inventory with sku ${inventory.sku} already exists`
+      );
+  }
+
   await dynamodb
     .put({
-      TableName: process.env.inventoryTableName as string,
+      TableName: '',
       Item: inventory,
     })
     .promise();
-  return inventory;
+  return { ...inventory } as Inventory;
 };
 
 export const handler = errorHandler(addInventory);

@@ -15,7 +15,7 @@ export const errorHandler = <T, U>(
         throw error;
       }
       const code = crypto.randomBytes(8).toString('hex');
-      console.error({ error, code, event });
+      console.error({ error, code, event: JSON.stringify(event) });
       throw new Error(
         `An error occurred while processing the request, errorCode: ${code}`
       );
