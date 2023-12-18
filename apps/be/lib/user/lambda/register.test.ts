@@ -1,13 +1,14 @@
 import { AppSyncResolverEvent } from 'aws-lambda';
 import { handler } from './register';
 import { MutationRegisterArgs } from '@optimus/common';
+import { vi } from 'vitest';
 
-jest.mock('aws-sdk', () => {
-  const actual = jest.requireActual('aws-sdk');
+vi.mock('aws-sdk', () => {
+  const actual = vi.importActual('aws-sdk');
   return {
     ...actual,
-    CognitoIdentityServiceProvider: jest.fn(() => ({
-      signUp: () => ({ promise: jest.fn().mockReturnThis() }),
+    CognitoIdentityServiceProvider: vi.fn(() => ({
+      signUp: () => ({ promise: vi.fn().mockReturnThis() }),
     })),
   };
 });

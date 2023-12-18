@@ -1,14 +1,15 @@
 import { AppSyncResolverEvent } from 'aws-lambda';
 import { handler } from './login';
 import { MutationRegisterArgs } from '@optimus/common';
+import { vi } from 'vitest';
 
 const testAccessToken = 'test-access-token';
 
-jest.mock('aws-sdk', () => {
-  const actual = jest.requireActual('aws-sdk');
+vi.mock('aws-sdk', () => {
+  const actual = vi.importActual('aws-sdk');
   return {
     ...actual,
-    CognitoIdentityServiceProvider: jest.fn(() => ({
+    CognitoIdentityServiceProvider: vi.fn(() => ({
       initiateAuth: () => ({
         promise: () => ({
           AuthenticationResult: {

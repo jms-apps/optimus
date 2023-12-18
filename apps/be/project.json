@@ -13,9 +13,11 @@
     },
     "test": {
       "dependsOn": ["^build"],
-      "executor": "@nx/jest:jest",
+      "executor": "@nx/vite:test",
+      "outputs": ["{options.reportsDirectory}"],
       "options": {
-        "jestConfig": "apps/be/jest.config.js"
+        "passWithNoTests": true,
+        "reportsDirectory": "../../coverage/apps/fe"
       }
     },
     "cdk": {
