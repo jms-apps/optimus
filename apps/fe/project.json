@@ -58,7 +58,12 @@
       "outputs": ["{options.reportsDirectory}"],
       "options": {
         "passWithNoTests": true,
-        "reportsDirectory": "../../coverage/apps/fe"
+        "reportsDirectory": "../../coverage/apps/fe",
+        "configurations": {
+          "watch": {
+            "watch": true
+          }
+        }
       }
     },
     "lint": {

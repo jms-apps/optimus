@@ -17,7 +17,12 @@
       "outputs": ["{options.reportsDirectory}"],
       "options": {
         "passWithNoTests": true,
-        "reportsDirectory": "../../coverage/apps/fe"
+        "reportsDirectory": "../../coverage/apps/be",
+        "configurations": {
+          "watch": {
+            "watch": true
+          }
+        }
       }
     },
     "cdk": {
