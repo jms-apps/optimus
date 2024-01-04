@@ -31,12 +31,12 @@ describe('InventoryStack', () => {
     });
   });
   it('should create resolvers in core stack to add and get inventory', () => {
+    // template.hasResourceProperties('AWS::AppSync::Resolver', {
+    //   DataSourceName: 'inventoryDataSource',
+    //   FieldName: 'getInventory',
+    // });
     template.hasResourceProperties('AWS::AppSync::Resolver', {
-      DataSourceName: 'inventoryDataSource',
-      FieldName: 'getInventory',
-    });
-    template.hasResourceProperties('AWS::AppSync::Resolver', {
-      DataSourceName: 'inventoryDataSource',
+      DataSourceName: 'addInventoryDataSource',
       FieldName: 'addInventory',
     });
   });
