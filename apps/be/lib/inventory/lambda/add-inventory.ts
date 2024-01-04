@@ -12,9 +12,6 @@ import crypto from 'crypto';
 const addInventory = async (
   event: AppSyncResolverEvent<MutationAddInventoryArgs>
 ): Promise<Inventory> => {
-  if (!(await isTokenValid(event.request.headers['x-auth-token'] as string))) {
-    throw new OptimusError('Unauthorized');
-  }
   const dynamodb = new DynamoDB.DocumentClient();
   const inventory = event.arguments.input;
 

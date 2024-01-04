@@ -52,9 +52,9 @@ describe('addInventoryHandler', () => {
       },
       request: {
         headers: {
-          'x-auth-token': 'valid-token'
-        }
-      }
+          'x-auth-token': 'valid-token',
+        },
+      },
     } as unknown as AppSyncResolverEvent<MutationAddInventoryArgs>);
     expect(result).toEqual({
       name: 'test',
@@ -63,7 +63,6 @@ describe('addInventoryHandler', () => {
       sku: expect.any(String),
     });
   });
-
 });
 
 //
