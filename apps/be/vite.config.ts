@@ -20,5 +20,6 @@ export default defineConfig({
     setupFiles: './jest.setup.ts',
     environment: 'node',
     include: ['./**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    threads: false
   },
 });

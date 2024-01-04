@@ -4,7 +4,7 @@ import { Template } from 'aws-cdk-lib/assertions';
 import { InventoryStack } from './inventory-stack';
 import { CoreStack } from '../core/core-stack';
 
-describe('FrontEndStack', () => {
+describe('InventoryStack', () => {
   let template: cdk.assertions.Template;
 
   beforeAll(() => {
@@ -13,7 +13,7 @@ describe('FrontEndStack', () => {
     const coreStack = new CoreStack(app, `${environment}CoreStack`, {
       environment,
     });
-    const stack = new InventoryStack(app, 'FrontEndStack', {
+    const stack = new InventoryStack(app, 'InventoryStack', {
       environment,
       apiId: coreStack.apiId,
     });
